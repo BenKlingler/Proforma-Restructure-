@@ -1,0 +1,46 @@
+## Overview
+
+The VBA (Visual Basic for Applications) macros included in this Excel workbook serve to automate data processing between different sheets, namely "Dummy", "Data", and "Proportion". The macros manage the task of matching codes between sheets, inserting new rows on matches, and carrying over relevant data and formulas.
+
+## Macros Description
+
+### Macro: `FindMatchingDataAndInsertRow`
+
+**Purpose:** 
+Automates the insertion of new rows into the "Data" sheet based on specific code matches from the "Dummy" sheet and carries over relevant data and formulas.
+
+**Functionality:**
+
+1. Retrieves codes:
+   - A 5-character code from the first visible row in column M on "Dummy".
+   - A 2-character code from the first visible row in column B on "Dummy".
+2. Identifies the last row in "Data" where:
+   - Column G matches the 5-character code.
+   - Column F matches the 2-character code.
+3. Inserts a new row directly below this match.
+4. Copies data and formulas from the row immediately above the new row, except for column K.
+5. Specifically, pulls values from "Dummy" for:
+   - Column J from Dummy's E.
+   - Column L from Dummy's G.
+   - Column N from Dummy's H.
+6. Drags down formulas in columns P to AC and recalculates the sheet to refresh all formulas.
+
+### Macro: `FindMatchingDataAndInsertRowInProportion`
+
+**Purpose:** 
+Inserts rows into the "Proportion" sheet based on matching codes from the "Dummy" sheet and transfers additional data from the "Data" sheet.
+
+**Functionality:**
+
+1. Uses the same codes extracted by the previous macro from the "Dummy" sheet.
+2. Locates the last row in "Proportion" where:
+   - Column F corresponds with the 5-character code.
+   - Column E corresponds with the 2-character code.
+3. Adds a new row below this found match.
+4. Searches "Data" to find the last row where:
+   - Column A contains a non-numeric value or an error.
+5. From this row in "Data", copies:
+   - The value from Column C to Column B in "Proportion".
+   - The value from Column L to Column K in "Proportion".
+   - The value three cells right of Column A (Column D) to Column C in "Proportion".
+6. If the above row contains formulas in columns D through J, it extends these formulas down to the new row in "Proportion".
